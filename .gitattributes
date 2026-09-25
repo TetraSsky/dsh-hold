@@ -1,0 +1,4 @@
+# Normalize every text file to LF in the repository and on checkout.
+# Without this, a Windows clone gets CRLF while scripts/build-client.mjs emits LF,
+# and tests/bundle.test.mjs would report the committed bundle as drifted.
+* text=auto eol=lf
