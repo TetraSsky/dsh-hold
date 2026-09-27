@@ -6,7 +6,21 @@ window.__ModuleLoader__.load({
     var exports = module.exports
 
     const React = require('react')
-    const primitives = require('@deepseek-ai/dsh-client-ui-primitives')
+    const hostPrimitives = require('@deepseek-ai/dsh-client-ui-primitives')
+    const primitives = { ...hostPrimitives }
+    const RENAMED_ICONS = {
+      IconChevronDownOutline14: 'IconChevronDownOutlineRegular',
+      IconChevronLeftOutline14: 'IconChevronLeftOutlineRegular',
+      IconChevronRightOutline14: 'IconChevronRightOutlineRegular',
+      IconChevronUpOutline14: 'IconChevronUpOutlineRegular',
+      IconEditOutline16: 'IconEditOutlineRegular',
+      IconQueueOutline14: 'IconQueueOutlineRegular',
+      IconSendOutline14: 'IconSendOutlineRegular',
+      IconTrashOutline16: 'IconTrashOutlineRegular',
+    }
+    for (const [legacy, current] of Object.entries(RENAMED_ICONS)) {
+      if (primitives[legacy] === undefined && hostPrimitives[current] !== undefined) primitives[legacy] = hostPrimitives[current]
+    }
 
     var plugin = (() => {
 // Pure hold model, shared by both halves. No clock, no services, no I/O.
